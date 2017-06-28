@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="result"></div>
+
+<script>
+    var recommendedType = 'interesting';
+    var isRecommended;
+    if (typeof recommendedType != 'undefined' && recommendedType) {
+        jQuery.ajax({
+            url: '/backend_sample.php',
+            method: 'POST',
+            data: {event: 'add', param: 100500},
+            dataType: 'json',
+            success: function(e){
+                isRecommended = e.hasOwnProperty('status') && e.status == 'success' ? true : false;
+                if (isRecommended) {
+                    jQuery('#result').text('ID товара добавлен в Cookie');
+                }
+            },
+            error: function(){
+                // something went wrong
+            }
+        });
+    }
+</script>
+
+</body></html>
